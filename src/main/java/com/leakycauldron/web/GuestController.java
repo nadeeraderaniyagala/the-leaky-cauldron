@@ -42,6 +42,9 @@ public class GuestController {
                 break;
             }
         }
+        this.reservationService.addHotelGuest(guest);
+
+        // to do call getGuests method to show the updated guest list
         return "redirect:guests";
     }
 }
