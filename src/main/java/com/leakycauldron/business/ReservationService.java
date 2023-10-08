@@ -1,14 +1,9 @@
 package com.leakycauldron.business;
 
-import java.util.*;
-
-import com.leakycauldron.data.Guest;
-import com.leakycauldron.data.GuestRepository;
-import com.leakycauldron.data.Reservation;
-import com.leakycauldron.data.ReservationRepository;
-import com.leakycauldron.data.Room;
-import com.leakycauldron.data.RoomRepository;
+import com.leakycauldron.data.*;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class ReservationService {
@@ -60,7 +55,7 @@ public class ReservationService {
     public List<Guest> getHotelGuests() {
         Iterable<Guest> guests = this.guestRepository.findAll();
         List<Guest> guestList = new ArrayList<>();
-        guests.forEach(guest -> guestList.add(guest));
+        guests.forEach(guestList::add);
         guestList.sort(new Comparator<Guest>() {
             @Override
             public int compare(Guest o1, Guest o2) {
@@ -78,6 +73,13 @@ public class ReservationService {
             throw new RuntimeException("Guest cannot be null");
         }
         this.guestRepository.save(guest);
+    }
+
+    public void deleteHotelGuestByEmail(String email) {
+        if (Objects.isNull(email)) {
+            throw new RuntimeException("Email cannot be null");
+        }
+        this.guestRepository.deleteGuestByEmailAddress(email);
     }
 
     public List<Room> getHotelRooms() {

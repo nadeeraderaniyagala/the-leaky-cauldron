@@ -5,8 +5,10 @@ import com.leakycauldron.business.RoomReservation;
 import com.leakycauldron.data.Guest;
 import com.leakycauldron.data.Room;
 import com.leakycauldron.util.DateUtil;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
@@ -32,12 +34,6 @@ public class WebserviceController {
     @GetMapping(path="/guests")
     public List<Guest> getGuests(){
         return this.reservationService.getHotelGuests();
-    }
-
-    @PostMapping(path="/guests")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addGuests(@RequestBody Guest guest){
-        this.reservationService.addHotelGuest(guest);
     }
 
     @GetMapping(path="/rooms")

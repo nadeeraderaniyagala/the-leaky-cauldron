@@ -9,6 +9,26 @@
     <link rel="stylesheet" th:href="@{/application.css}">
 </head>
 <body>
+<h1>Guest Registry</h1>
+
+
+<div class="container mt-3">
+    <form action="/guests" method="post">
+        <p>Enter following details of the guest : </p>
+        <p>First Name: </p>
+        <input class="form-control" name="firstName" th:required="required" type="text">
+        <p>Last Name: </p>
+        <input class="form-control" name="lastName" th:required="required" type="text">
+        <p>Email Address: </p>
+        <input class="form-control" name="emailAddress" th:required="required" type="text">
+        <p>Phone Number: </p>
+        <input class="form-control" name="phoneNumber" th:required="required" type="text">
+
+        <button class="btn btn-primary" type="submit">Add/Edit</button>
+    </form>
+</div>
+
+
 <table class="table table-bordered">
     <thead class="thead-dark">
     <tr>
@@ -16,6 +36,8 @@
         <td>First Name</td>
         <td>Email Address</td>
         <td>Phone Number</td>
+        <td></td>
+        <td></td>
     </tr>
     </thead>
     <tr th:each="guest: ${guests}">
@@ -23,9 +45,11 @@
         <td th:text="${guest.firstName}">First Name</td>
         <td th:text="${guest.emailAddress}">Email Address</td>
         <td th:text="${guest.phoneNumber}">Phone Number</td>
+        <td><a class="btn btn-success" href="">Edit</a></td>
+        <td><a class="btn btn-danger" href="">Delete</a></td>
     </tr>
-
 </table>
+
 
 </body>
 </html>
